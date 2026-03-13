@@ -1,0 +1,20 @@
+import socket
+
+target = input("Enter target IP or website: ")
+start_port = int(input("Enter start port: "))
+end_port = int(input("Enter end port: "))
+
+print("Scanning target:", target)
+
+for port in range(start_port, end_port + 1):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socket.setdefaulttimeout(1)
+
+    result = s.connect_ex((target, port))
+
+    if result == 0:
+        print("Port", port, "is OPEN")
+    else:
+        print("Port", port, "is CLOSED")
+
+    s.close()
